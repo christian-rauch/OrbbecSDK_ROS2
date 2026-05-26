@@ -172,15 +172,28 @@ macro(add_orbbec_executable TARGET SOURCE)
     add_executable(${TARGET} ${SOURCE})
     target_include_directories(${TARGET} PUBLIC ${COMMON_INCLUDE_DIRS})
     target_link_libraries(${TARGET} ${COMMON_LIBRARIES} ${PROJECT_NAME})
-    ament_target_dependencies(${TARGET} ${dependencies})
 endmacro()
 
 # Define library and nodes
 add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 
-ament_target_dependencies(${PROJECT_NAME} ${dependencies})
 target_include_directories(${PROJECT_NAME} PUBLIC ${COMMON_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} ${COMMON_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}
+    ${orbbec_camera_msgs_TARGETS}
+    ${sensor_msgs_TARGETS}
+    ${std_srvs_TARGETS}
+    ament_index_cpp::ament_index_cpp
+    camera_info_manager::camera_info_manager
+    cv_bridge::cv_bridge
+    diagnostic_updater::diagnostic_updater
+    Eigen3::Eigen
+    image_transport::image_transport
+    message_filters::message_filters
+    rclcpp::rclcpp
+    rclcpp_components::component
+    tf2::tf2
+    tf2_ros::tf2_ros
+)
 
 rclcpp_components_register_node(
     ${PROJECT_NAME} PLUGIN "orbbec_camera::OBCameraNodeDriver" EXECUTABLE orbbec_camera_node
@@ -207,15 +220,32 @@ install(
 
 add_library(frame_latency SHARED tools/frame_latency.cpp)
 target_include_directories(frame_latency PUBLIC ${COMMON_INCLUDE_DIRS})
-target_link_libraries(frame_latency ${COMMON_LIBRARIES})
-ament_target_dependencies(frame_latency ${dependencies})
+target_link_libraries(frame_latency
+    ${orbbec_camera_msgs_TARGETS}
+    ${sensor_msgs_TARGETS}
+    ${tf2_msgs_TARGETS}
+    diagnostic_updater::diagnostic_updater
+    rclcpp::rclcpp
+    rclcpp_components::component
+)
 
 rclcpp_components_register_node(frame_latency PLUGIN "orbbec_camera::FrameLatencyNode" EXECUTABLE frame_latency_node)
 
 add_library(start_benchmark SHARED tools/start_benchmark.cpp)
 target_include_directories(start_benchmark PUBLIC ${COMMON_INCLUDE_DIRS})
-target_link_libraries(start_benchmark ${COMMON_LIBRARIES})
-ament_target_dependencies(start_benchmark ${dependencies})
+target_link_libraries(start_benchmark
+    ${OpenCV_LIBS}
+    ${orbbec_camera_msgs_TARGETS}
+    ${sensor_msgs_TARGETS}
+    ${std_srvs_TARGETS}
+    camera_info_manager::camera_info_manager
+    diagnostic_updater::diagnostic_updater
+    Eigen3::Eigen
+    image_transport::image_transport
+    rclcpp::rclcpp
+    rclcpp_components::component
+    tf2_ros::tf2_ros
+)
 
 rclcpp_components_register_node(
     start_benchmark PLUGIN "orbbec_camera::tools::StartBenchmark" EXECUTABLE start_benchmark_node
@@ -223,8 +253,21 @@ rclcpp_components_register_node(
 
 add_library(multi_save_rgbir SHARED tools/multi_save_rgbir.cpp src/utils.cpp)
 target_include_directories(multi_save_rgbir PUBLIC ${COMMON_INCLUDE_DIRS})
-target_link_libraries(multi_save_rgbir ${COMMON_LIBRARIES})
-ament_target_dependencies(multi_save_rgbir ${dependencies})
+target_link_libraries(multi_save_rgbir
+    ${OpenCV_LIBS}
+    ${orbbec_camera_msgs_TARGETS}
+    ${sensor_msgs_TARGETS}
+    ${std_srvs_TARGETS}
+    camera_info_manager::camera_info_manager
+    cv_bridge::cv_bridge
+    diagnostic_updater::diagnostic_updater
+    Eigen3::Eigen
+    image_transport::image_transport
+    rclcpp::rclcpp
+    rclcpp_components::component
+    tf2::tf2
+    tf2_ros::tf2_ros
+)
 
 rclcpp_components_register_node(
     multi_save_rgbir PLUGIN "orbbec_camera::tools::MultiCameraSubscriber" EXECUTABLE multi_save_rgbir_node
