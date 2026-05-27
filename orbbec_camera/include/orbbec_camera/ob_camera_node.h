@@ -47,7 +47,6 @@
 #include "libobsensor/ObSensor.hpp"
 
 #include "orbbec_camera_msgs/msg/device_info.hpp"
-#include "orbbec_camera_msgs/msg/depth_filter_param.hpp"
 #include "orbbec_camera_msgs/msg/depth_filter_state.hpp"
 #include "orbbec_camera_msgs/msg/depth_filters_status.hpp"
 #include "orbbec_camera_msgs/srv/get_device_info.hpp"
