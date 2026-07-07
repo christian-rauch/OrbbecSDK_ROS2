@@ -1,7 +1,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include <orbbec_camera/ob_camera_node_driver.h>
 #include <orbbec_camera/ob_camera_node.h>
-#include <magic_enum/magic_enum.hpp>
+#include <magic_enum.hpp>
 #include <cstring>
 #include <iostream>
 #include <memory>

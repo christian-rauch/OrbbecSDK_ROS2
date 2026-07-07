@@ -54,6 +54,7 @@ endforeach()
 
 find_package(PkgConfig REQUIRED)
 find_package(OpenSSL REQUIRED)
+find_package(magic_enum CONFIG REQUIRED)
 
 if(message_filters_VERSION VERSION_GREATER_EQUAL 5.0)
     add_compile_definitions(message_filters_QoS)
@@ -203,6 +204,7 @@ target_link_libraries(${PROJECT_NAME}
     rclcpp_components::component
     tf2::tf2
     tf2_ros::tf2_ros
+    magic_enum::magic_enum
     ${EXTRA_TARGETS}
 )
 
