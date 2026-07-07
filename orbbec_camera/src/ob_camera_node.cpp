@@ -20,6 +20,7 @@
 #include <geometry_msgs/msg/transform_stamped.hpp>
 #include <sstream>
 #include <algorithm>
+#include <magic_enum.hpp>
 
 #include "orbbec_camera/utils.h"
 #include <filesystem>

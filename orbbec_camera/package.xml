@@ -36,7 +36,8 @@
   <depend>libgoogle-glog-dev</depend>
   <depend>libssl-dev</depend>
   <depend>opengl</depend>
-  <depend>magic_enum</depend>
+
+  <build_depend>magic_enum</build_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
